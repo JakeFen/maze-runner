@@ -1,5 +1,11 @@
 <div>
   <div *ngFor="let row of grid" class="node-row">
-    <grid-node *ngFor="let node of row"></grid-node>
+    <grid-node
+      *ngFor="let node of row"
+      [col]="node.col"
+      [row]="node.row"
+      [isStart]="node.isStart"
+      [isFinish]="node.isFinish"
+    ></grid-node>
   </div>
 </div>
