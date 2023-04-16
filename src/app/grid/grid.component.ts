@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { GridNode } from '../shared/interfaces/grid';
+import { Store, select } from '@ngrx/store';
+import { createGrid } from '../shared/data-access/state/maze/maze.actions';
+import { selectAllNodes } from '../shared/data-access/state/maze/maze.selectors';
+import { AppState } from '../shared/data-access/state/app.state';
 
 @Component({
   selector: 'grid',
@@ -7,29 +10,13 @@ import { GridNode } from '../shared/interfaces/grid';
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent {
-  grid: any = [];
+  public grid$ = this.store.select(selectAllNodes);
 
-  constructor() {
-    for (let row = 0; row < 21; row++) {
-      const currentRow = [];
-      for (let col = 0; col < 55; col++) {
-        currentRow.push(createNode(row, col));
-      }
-      this.grid.push(currentRow);
-    }
+  constructor(private store: Store<AppState>) {
+    this.store.dispatch(createGrid());
+  }
+
+  log(data: any) {
+    console.log(data);
   }
 }
-
-const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
-const END_NODE_ROW = 10;
-const END_NODE_COL = 40;
-
-const createNode = (row: number, col: number): GridNode => {
-  return {
-    row,
-    col,
-    isStart: START_NODE_ROW === row && START_NODE_COL === col,
-    isFinish: END_NODE_ROW === row && END_NODE_COL === col,
-  };
-};
