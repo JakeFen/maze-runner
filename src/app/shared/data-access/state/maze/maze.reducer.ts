@@ -41,8 +41,9 @@ export const gridReducer = createReducer(
   on(runDijkstra, (state) => ({
     ...state,
   })),
-  on(runDijkstraSuccess, (state) => ({
+  on(runDijkstraSuccess, (state, { grid }) => ({
     ...state,
+    grid: grid,
   })),
   on(runDijkstraFailure, (state, { error }) => ({
     ...state,

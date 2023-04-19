@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { GridNode, GridState } from 'src/app/shared/interfaces/grid';
+import { GridNode } from 'src/app/shared/interfaces/grid';
 
 // Create Grid
 export const createGrid = createAction('[Maze] Load Grid');
@@ -16,7 +16,7 @@ export const createGridFailure = createAction(
 export const runDijkstra = createAction('[Dijkstra] Run Dijkstra');
 export const runDijkstraSuccess = createAction(
   '[Dijkstra] Run Dijkstra Success',
-  props<{ grid: any }>()
+  props<{ grid: GridNode[][] }>()
 );
 export const runDijkstraFailure = createAction(
   '[Dijkstra] Run Dijkstra Failure',

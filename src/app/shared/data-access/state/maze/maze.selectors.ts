@@ -8,5 +8,12 @@ export const selectAllNodes = createSelector(
   (state: GridState) => state.grid
 );
 
+export const getGrid = createSelector(
+  selectGrid,
+  (state: GridState) => state.grid
+);
+
 export const selectStartNode = (state: AppState) => state.grid.startNode;
 export const selectEndNode = (state: AppState) => state.grid.endNode;
+
+// Selector that pulls grid,start,end

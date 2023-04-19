@@ -10,6 +10,7 @@ import { runDijkstra } from '../shared/data-access/state/maze/maze.actions';
 })
 export class NavBarComponent {
   constructor(private store: Store<AppState>) {}
+
   runDijkstra() {
     this.store.dispatch(runDijkstra());
   }

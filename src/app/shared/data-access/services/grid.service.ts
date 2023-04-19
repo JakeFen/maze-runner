@@ -9,10 +9,10 @@ export class GridService {
   END_NODE_COL = 40;
 
   createGrid(): CreateGrid[] {
-    let grid = [];
+    let grid: GridNode[][] = [];
 
     for (let row = 0; row < 21; row++) {
-      const currentRow = [];
+      let currentRow: GridNode[] = [];
       for (let col = 0; col < 55; col++) {
         currentRow.push({
           row,

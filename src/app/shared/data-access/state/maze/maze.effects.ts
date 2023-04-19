@@ -11,8 +11,9 @@ import {
   runDijkstraFailure,
   runDijkstraSuccess,
 } from './maze.actions';
-import { catchError, from, map, of, switchMap } from 'rxjs';
+import { catchError, from, map, of, switchMap, withLatestFrom } from 'rxjs';
 import {
+  getGrid,
   selectAllNodes,
   selectEndNode,
   selectStartNode,
@@ -50,25 +51,20 @@ export class MazeEffects {
     )
   );
 
-  dijkstra$ = createEffect(() =>
-    this.actions$.pipe(
+  dijkstra$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(runDijkstra),
-      switchMap(() =>
-        from(
-          this.dijkstraService.dijkstra(
-            this.store.select(selectAllNodes),
-            this.store.select(selectStartNode),
-            this.store.select(selectEndNode)
-          )
-        ).pipe(
-          map((data) => {
-            return runDijkstraSuccess({
-              grid: data,
-            });
-          }),
+      withLatestFrom(this.store.select(getGrid)),
+      switchMap(([action, request]) =>
+        this.dijkstraService.dijkstra(request).pipe(
+          map((res) =>
+            runDijkstraSuccess({
+              grid: res,
+            })
+          ),
           catchError((error) => of(runDijkstraFailure({ error: error })))
         )
       )
-    )
-  );
+    );
+  });
 }
