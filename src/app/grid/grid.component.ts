@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { createGrid } from '../shared/data-access/state/maze/maze.actions';
-import { selectAllNodes } from '../shared/data-access/state/maze/maze.selectors';
-import { AppState } from '../shared/data-access/state/app.state';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'grid',
@@ -10,9 +6,5 @@ import { AppState } from '../shared/data-access/state/app.state';
   styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent {
-  public grid$ = this.store.select(selectAllNodes);
-
-  constructor(private store: Store<AppState>) {
-    this.store.dispatch(createGrid());
-  }
+  @Input() grid;
 }

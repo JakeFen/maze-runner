@@ -1,53 +1,64 @@
 import { createReducer, on } from '@ngrx/store';
-import { GridState } from 'src/app/shared/interfaces/grid';
-import {
-  createGrid,
-  createGridSuccess,
-  createGridFailure,
-  runDijkstra,
-  runDijkstraSuccess,
-  runDijkstraFailure,
-} from './maze.actions';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import * as MazeActions from './maze.actions';
+import * as MazeSelectors from './maze.selectors';
 
-export const initialState: GridState = {
-  grid: [],
-  startNode: null,
-  endNode: null,
-  error: null,
-  status: 'pending',
+export interface Grid {
+  _id: number;
+  rows: any[];
+}
+
+export interface State {
+  grid: Grid;
+  string: any;
+  error: string;
+}
+
+export const initialState: State = {
+  grid: null,
+  string: 'Test',
+  error: 'Error',
 };
 
 export const gridReducer = createReducer(
   initialState,
 
-  // CreateGrid
-  on(createGrid, (state) => ({
+  // Create Grid
+  on(MazeActions.createGrid, (state) => ({
     ...state,
-    status: 'loading',
   })),
-  on(createGridSuccess, (state, { grid, startNode, endNode }) => ({
+  on(MazeActions.createGridSuccess, (state, { grid }) => ({
     ...state,
     grid: grid,
-    startNode: startNode,
-    endNode: endNode,
-    status: 'success',
   })),
-  on(createGridFailure, (state, { error }) => ({
+  on(MazeActions.createGridFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
   })),
 
-  on(runDijkstra, (state) => ({
+  // Update Start Node
+  on(MazeActions.updateStartNode, (state) => ({
     ...state,
   })),
-  on(runDijkstraSuccess, (state, { grid }) => ({
+  on(MazeActions.updateStartNodeSuccess, (state, { grid }) => ({
     ...state,
     grid: grid,
   })),
-  on(runDijkstraFailure, (state, { error }) => ({
+  on(MazeActions.updateStartNodeFailure, (state, { error }) => ({
     ...state,
     error: error,
-    status: 'error',
+  })),
+
+  // Update Error
+  on(MazeActions.updateString, (state) => ({
+    ...state,
+  })),
+  on(MazeActions.updateStringSuccess, (state, { string }) => ({
+    ...state,
+    string: string,
+  })),
+  on(MazeActions.updateStringFailure, (state, { error }) => ({
+    ...state,
+    error: error,
   }))
 );

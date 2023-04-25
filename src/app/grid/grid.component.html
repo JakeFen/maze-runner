@@ -1,5 +1,5 @@
 <div>
-  <div *ngFor="let row of grid$ | async" class="node-row">
+  <div *ngFor="let row of grid | async" class="node-row">
     <grid-node
       *ngFor="let node of row"
       [col]="node.col"

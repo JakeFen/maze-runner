@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../shared/data-access/state/app.state';
-import { runDijkstra } from '../shared/data-access/state/maze/maze.actions';
+import {
+  updateStartNode,
+  updateString,
+} from '../shared/data-access/state/maze/maze.actions';
+import { getString } from '../shared/data-access/state/maze/maze.selectors';
 
 @Component({
   selector: 'nav-bar',
@@ -9,9 +12,15 @@ import { runDijkstra } from '../shared/data-access/state/maze/maze.actions';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent {
-  constructor(private store: Store<AppState>) {}
+  stringMessage$ = this.store.select(getString);
 
-  runDijkstra() {
-    this.store.dispatch(runDijkstra());
+  constructor(private store: Store<any>) {}
+
+  test() {
+    this.store.dispatch(updateString());
+  }
+
+  updateStartNode() {
+    this.store.dispatch(updateStartNode());
   }
 }

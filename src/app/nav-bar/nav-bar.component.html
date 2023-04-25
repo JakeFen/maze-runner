@@ -1,6 +1,5 @@
 <mat-toolbar color="accent">
   <span>Maze Runner</span>
-  <button mat-flat-button color="warn" (click)="runDijkstra()">
-    Run Algorithm
-  </button>
+  <button mat-flat-button (click)="test()">{{ stringMessage$ | async }}</button>
+  <button mat-flat-button (click)="updateStartNode()">Update Start Node</button>
 </mat-toolbar>

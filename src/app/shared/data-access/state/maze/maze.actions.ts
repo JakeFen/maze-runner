@@ -1,24 +1,34 @@
 import { createAction, props } from '@ngrx/store';
-import { GridNode } from 'src/app/shared/interfaces/grid';
 
 // Create Grid
-export const createGrid = createAction('[Maze] Load Grid');
+export const createGrid = createAction('[Grid] Create Grid');
 export const createGridSuccess = createAction(
-  '[Maze] Load Grid Success',
-  props<{ grid: GridNode[][]; startNode: GridNode; endNode: GridNode }>()
+  '[Grid] Create Grid Success',
+  props<{ grid: any }>()
 );
 export const createGridFailure = createAction(
-  '[Maze] Load Grid Failure',
+  '[Grid] Create Grid Failure',
   props<{ error: string }>()
 );
 
-// Dijkstra
-export const runDijkstra = createAction('[Dijkstra] Run Dijkstra');
-export const runDijkstraSuccess = createAction(
-  '[Dijkstra] Run Dijkstra Success',
-  props<{ grid: GridNode[][] }>()
+// Update Start Node
+export const updateStartNode = createAction('[Error] Update Start Node');
+export const updateStartNodeSuccess = createAction(
+  '[Error] Update Start Node Success',
+  props<{ grid: any }>()
 );
-export const runDijkstraFailure = createAction(
-  '[Dijkstra] Run Dijkstra Failure',
+export const updateStartNodeFailure = createAction(
+  '[Error] Update Start Node Failure',
+  props<{ error: string }>()
+);
+
+// Update String
+export const updateString = createAction('[Error] Update String');
+export const updateStringSuccess = createAction(
+  '[Error] Update String Success',
+  props<{ string: string }>()
+);
+export const updateStringFailure = createAction(
+  '[Error] Update String Failure',
   props<{ error: string }>()
 );

@@ -1,5 +1,5 @@
-import { GridState } from '../../interfaces/grid';
+// import { GridState } from '../../interfaces/grid';
 
-export interface AppState {
-  grid: GridState;
-}
+// export interface AppState {
+//   grid: GridState;
+// }
